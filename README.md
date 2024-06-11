@@ -47,43 +47,52 @@ import java.util.Scanner;
 public class Main {
     public static void main (String[] args) { 
       ArrayList<String> bookStore = new ArrayList<String>();
+      Scanner scanner = new Scanner(System.in);
 
-      var scanner = new Scanner(System.in);
       while(true){
-        System.out.println("Please enter a book you want to add to the store or type exit to stop: ");
-        var bookAdded = scanner.nextLine();
-        if(bookAdded.equalsIgnoreCase("exit")){
-          break;
+      
+        while(true){
+          System.out.println("Please enter a book you want to add to the store or type 'exit' to stop: ");
+          String bookAdded = scanner.nextLine();
+        
+          if(bookAdded.equalsIgnoreCase("exit")){
+             break;
+          }
+        
+          addBook(bookStore, bookAdded);
         }
-        addBook(bookStore, bookAdded);
+      
+        printArrayList(bookStore);
+
+        while(true){
+          System.out.println("Please enter a book you want to remove from the store or type 'done' to stop: ");
+          String bookRemoved = scanner.nextLine();
+
+          if(bookRemoved.equalsIgnoreCase("done")){
+            break;
+          }
+        
+          removeBook(bookStore, bookRemoved);
+          printArrayList(bookStore);
+        }
       }
-
-      printArrayList(bookStore);
-      
-      System.out.println("Please enter a book you want to remove from the store: ");
-      var bookRemoved = scanner.nextLine();
-      removeBook(bookStore, bookRemoved);
-
-      printArrayList(bookStore);
-      
-      scanner.close();
     }
 
     public static void printArrayList(ArrayList<String> books){
-      System.out.println("Bookstore has the following books: ");
-      for (String book : books){
-        System.out.println(book);
-      }
+        System.out.println("Bookstore has the following books: ");
+        for (String book : books){
+          System.out.println(book);
+        }
     }
 
     public static void addBook(ArrayList<String> bookStore, String book){
-      bookStore.add(book);
-      System.out.println(book + " has been added to the bookstore");
+        bookStore.add(book);
+        System.out.println(book + " has been added to the bookstore");
     }
 
     public static void removeBook(ArrayList<String> bookStore, String book){
-      bookStore.removeIf(b -> b.equals(book));
-      System.out.println(book + " has been removed from the bookstore");
+        bookStore.removeIf(b -> b.equals(book));
+        System.out.println(book + " has been removed from the bookstore");
     }
 
 }
